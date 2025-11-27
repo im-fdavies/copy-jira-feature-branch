@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Jira FAB Branch Copier – Options</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        margin: 16px;
+        max-width: 520px;
+        line-height: 1.5;
+        color: #202124;
+      }
+
+      h1 {
+        font-size: 20px;
+        margin-bottom: 4px;
+      }
+
+      .subtitle {
+        font-size: 13px;
+        color: #5f6368;
+        margin-bottom: 20px;
+      }
+
+      .field {
+        margin-bottom: 20px;
+      }
+
+      label {
+        font-weight: 500;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 6px 8px;
+        box-sizing: border-box;
+        margin-top: 4px;
+        border: 1px solid #dadce0;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #1a73e8;
+        box-shadow: 0 0 0 1px rgba(26, 115, 232, 0.2);
+      }
+
+      button {
+        padding: 6px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+        border: 1px solid #1a73e8;
+        background: #1a73e8;
+        color: #fff;
+        font-size: 14px;
+      }
+
+      button:hover {
+        background: #185abc;
+        border-color: #185abc;
+      }
+
+      button:disabled {
+        opacity: 0.7;
+        cursor: default;
+      }
+
+      #shortcutDisplay {
+        font-family: monospace;
+        margin-left: 8px;
+        font-size: 13px;
+      }
+
+      .hint {
+        font-size: 12px;
+        color: #5f6368;
+        margin-top: 4px;
+      }
+
+      fieldset {
+        border: 1px solid #dadce0;
+        border-radius: 6px;
+        padding: 10px 12px;
+        margin: 0;
+      }
+
+      legend {
+        padding: 0 4px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #202124;
+      }
+
+      .radio-group label {
+        font-weight: 400;
+        margin-right: 12px;
+      }
+
+      #status {
+        margin-left: 8px;
+      }
+
+      #status.ok {
+        color: #188038;
+      }
+
+      #status.error {
+        color: #b00020;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Jira FAB Branch Copier</h1>
+    <div class="subtitle">
+      Configure how your Jira ticket gets turned into a Git branch command.
+    </div>
+
+    <div class="field">
+      <fieldset>
+        <legend>GH CLI installed?</legend>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="ghCliInstalled" value="yes" /> Yes
+          </label>
+          <label>
+            <input type="radio" name="ghCliInstalled" value="no" /> No
+          </label>
+        </div>
+        <div class="hint">
+          If set to <strong>Yes</strong>, the extension will use
+          <code>gco -b feature/FAB-XXXXXX</code>.<br />
+          If set to <strong>No</strong>, it will use
+          <code>git checkout -b feature/FAB-XXXXXX</code>.
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="field">
+      <label for="host">Host (optional)</label>
+      <input id="host" type="text" placeholder="e.g. origin" />
+      <div class="hint">
+        Your default git remote, e.g. <code>origin</code>. Stored for future
+        features (not used yet in the command).
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Custom keyboard shortcut</label><br />
+      <button id="recordShortcut">Press to record shortcut</button>
+      <span id="shortcutDisplay">(none)</span>
+      <div class="hint">
+        This is an in-page shortcut. For Chrome's native shortcut, go to
+        <code>chrome://extensions/shortcuts</code>.
+      </div>
+    </div>
+
+    <div class="field">
+      <button id="save">Save</button>
+      <span id="status" class="hint"></span>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>
